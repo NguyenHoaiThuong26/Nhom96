@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Header from "../../components/layout/header";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 
 
 function LoginPage() {
@@ -23,7 +24,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen relative bg-[url('/login-background.png')] bg-cover bg-center">
+    <div className="min-h-screen relative bg-[url('/images/login-background.png')] bg-cover bg-center">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
@@ -43,14 +44,14 @@ function LoginPage() {
           </div>
 
           {/* Tabs */}
-          <div className="flex border-b border-gray-200/50">
+          {/* <div className="flex border-b border-gray-200/50">
             <button className="flex-1 py-3 text-[#5c3a2e] font-medium border-b-2 border-[#cc5970]">
               Login
             </button>
             <button className="flex-1 py-3 text-gray-400 hover:text-gray-600">
               Sign Up
             </button>
-          </div>
+          </div> */}
 
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-5 text-left">
@@ -102,7 +103,7 @@ function LoginPage() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 accent-[#cc5970]"
+                  className="w-3 h-3 accent-[#cc5970]"
                 />
                 <span className="text-[#5c3a2e]">Remember me</span>
               </label>
@@ -168,6 +169,16 @@ function LoginPage() {
 
           </div>
 
+          <div className="text-center text-sm text-gray-600">
+            Don’t have an account?{" "}
+            <a
+              href="/signup"
+              className="text-[#cc5970] font-medium hover:underline"
+            >
+              Sign up
+            </a>
+          </div>
+
           <div className="pt-6 mt-4 border-t border-gray-200/50 text-center space-y-2">
             <p className="text-sm text-gray-500">
               Your data is secure with Nhom96
@@ -179,6 +190,8 @@ function LoginPage() {
 
         </div>
       </main>
+      <Footer />
+
     </div>
   );
 }
