@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 
 
 function LoginPage() {
@@ -23,7 +24,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen relative bg-[url('/login-background.png')] bg-cover bg-center">
+    <div className="min-h-screen relative bg-[url('/images/login-background.png')] bg-cover bg-center">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
@@ -189,6 +190,8 @@ function LoginPage() {
 
         </div>
       </main>
+      <Footer />
+
     </div>
   );
 }
