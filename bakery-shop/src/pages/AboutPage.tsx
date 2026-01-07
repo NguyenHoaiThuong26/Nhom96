@@ -1,12 +1,18 @@
 import { ChevronDown } from "lucide-react";
 import TimelineHeaderSection from "../components/about/TimelineHeaderSection";
 import TimelineCardsSection from "../components/about/TimelineCardsSection";
+import CoreValuesSection from "../components/about/CoreValuesSection";
+import TeamIntroSection from "../components/about/TeamIntroSection";
+import TeamProfilesSection from "../components/about/TeamProfilesSection";
+import Header from "./../components/layout/Header";
+import Footer from "./../components/layout/Footer";
 
 export default function AboutHeroSection() {
   return (
     <>
+      <Header />
       {/* ===== HERO SECTION ===== */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-screen overflow-hidden pt-20">
         {/* Background */}
         <div className="absolute inset-0">
           <div className="w-full h-full bg-[url('/images/about-background.png')] bg-no-repeat bg-cover bg-center" />
@@ -52,12 +58,25 @@ export default function AboutHeroSection() {
       {/* ===== TIMELINE SECTION (PHẦN MỚI) ===== */}
       <section className="py-20 bg-gradient-to-b from-white to-amber-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col">
             <TimelineHeaderSection />
             <TimelineCardsSection />
           </div>
         </div>
       </section>
+
+       {/* ===== TEAM SECTION (PHẦN MỚI) ===== */}
+      <section className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-6 space-y-16">
+          <TeamIntroSection />
+          <TeamProfilesSection />
+        </div>
+      </section>
+
+      {/* ===== CORE VALUES SECTION (PHẦN MỚI) ===== */}
+      <CoreValuesSection />
+
+      <Footer />
     </>
   );
 }

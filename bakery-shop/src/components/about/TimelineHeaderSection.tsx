@@ -1,6 +1,6 @@
 export default function TimelineHeaderSection() {
   return (
-    <header className="text-center mb-16">
+    <header className="text-center">
       {/* Title */}
       <h2 className="text-4xl font-bold text-[#5c3a2e] mb-4">
         Our Journey Through Time
