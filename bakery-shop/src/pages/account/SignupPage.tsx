@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "../../components/layout/Header";
 
 function SignupPage() {
   const [username, setUsername] = useState("");
@@ -33,8 +32,6 @@ function SignupPage() {
     <div className="min-h-screen relative bg-[url('/login-background.png')] bg-cover bg-center">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
-
-      <Header />
 
       {/* Main content */}
       <main className="relative z-10 pt-28 pb-16 px-4 flex justify-center">

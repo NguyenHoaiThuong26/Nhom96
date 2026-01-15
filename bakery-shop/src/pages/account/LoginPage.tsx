@@ -1,22 +1,30 @@
 import { useState } from "react";
-import Header from "../../components/layout/Header";
-import Footer from "../../components/layout/Footer";
+import { useNavigate } from "react-router-dom"
+import AuthService from "../../service/AuthService"
 
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate()
   const [password, setPassword] = useState("");
   const [identifier, setIdentifier] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const handleLogin = (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError("")
+    setLoading(true)
 
-  console.log({
-    identifier, // có thể là username hoặc email
-    password,
-    rememberMe,
-  });
+    try {
+      await AuthService.login(identifier, password)
+
+      navigate("/home")
+    } catch (err: any) {
+      setError(err.message || "Đăng nhập thất bại")
+    } finally {
+      setLoading(false)
+    }
   };
 
   const handleSocialLogin = (provider: string) => {
@@ -27,8 +35,6 @@ function LoginPage() {
     <div className="min-h-screen relative bg-[url('/images/login-background.png')] bg-cover bg-center">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
-
-      <Header />
 
       {/* Main content */}
       <main className="relative z-10 pt-28 pb-16 px-4 flex justify-center">
@@ -43,15 +49,13 @@ function LoginPage() {
             </p>
           </div>
 
-          {/* Tabs */}
-          {/* <div className="flex border-b border-gray-200/50">
-            <button className="flex-1 py-3 text-[#5c3a2e] font-medium border-b-2 border-[#cc5970]">
-              Login
-            </button>
-            <button className="flex-1 py-3 text-gray-400 hover:text-gray-600">
-              Sign Up
-            </button>
-          </div> */}
+           {/* ERROR */}
+          {error && (
+            <div className="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">
+              {error}
+            </div>
+          )}
+
 
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-5 text-left">
@@ -115,9 +119,10 @@ function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-[#cc5970] text-white py-3 rounded-lg font-medium hover:bg-[#b84d61] transition"
+              disabled={loading}
+              className="w-full bg-[#cc5970] text-white py-3 rounded-lg font-medium hover:bg-[#b84d61] transition disabled:opacity-70"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 
@@ -190,7 +195,6 @@ function LoginPage() {
 
         </div>
       </main>
-      <Footer />
 
     </div>
   );

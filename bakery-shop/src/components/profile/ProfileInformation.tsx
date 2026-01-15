@@ -1,7 +1,6 @@
-"use client"
-
-import { useState } from "react"
 import { Save } from "lucide-react"
+import AuthService from "../../service/AuthService"
+import { useEffect, useState } from "react"
 
 interface ProfileFormData {
   fullName: string
@@ -11,17 +10,33 @@ interface ProfileFormData {
   dateOfBirth: string
 }
 
-export default function ProfileInformation() {
-  const [formData, setFormData] = useState<ProfileFormData>({
-    fullName: "Sarah Baker",
-    email: "sarah@example.com",
-    phone: "+1 (555) 123-4567",
-    address: "123 Maple Street, Springfield, IL 62701",
-    dateOfBirth: "1990-05-15",
-  })
+const EMPTY_PROFILE: ProfileFormData = {
+  fullName: "",
+  email: "",
+  phone: "",
+  address: "",
+  dateOfBirth: "",
+}
 
+export default function ProfileInformation() {
+  const [formData, setFormData] = useState<ProfileFormData>(EMPTY_PROFILE)
   const [isSaving, setIsSaving] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+
+  /* ✅ Load user nếu đã đăng nhập */
+  useEffect(() => {
+    const user = AuthService.getCurrentUser()
+
+    if (user) {
+      setFormData({
+        fullName: user.fullName ?? "",
+        email: user.email ?? "",
+        phone: user.phone ?? "",
+        address: user.address ?? "",
+        dateOfBirth: user.dateOfBirth ?? "",
+      })
+    }
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,16 +45,13 @@ export default function ProfileInformation() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const saveProfile = async () => {
-    // 🔁 Sau này thay bằng API thật
-    await new Promise((resolve) => setTimeout(resolve, 500))
-  }
-
   const handleSave = async () => {
     setIsSaving(true)
-    await saveProfile()
-    setIsSaving(false)
 
+    // 🔁 Sau này gọi PUT /users/:id
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
+    setIsSaving(false)
     setShowSuccess(true)
     setTimeout(() => setShowSuccess(false), 3000)
   }
@@ -66,16 +78,13 @@ export default function ProfileInformation() {
 
       {/* Form */}
       <div className="space-y-6">
-        {/* Full Name */}
         <FormInput
           label="Full Name"
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
-          placeholder="Enter your full name"
         />
 
-        {/* Email */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Email Address
@@ -86,21 +95,15 @@ export default function ProfileInformation() {
             disabled
             className="mt-2 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-600"
           />
-          <p className="mt-1 text-xs text-gray-500">
-            Email cannot be changed
-          </p>
         </div>
 
-        {/* Phone */}
         <FormInput
           label="Phone Number"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          placeholder="Enter your phone number"
         />
 
-        {/* Address */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Address
@@ -114,7 +117,6 @@ export default function ProfileInformation() {
           />
         </div>
 
-        {/* Date of Birth */}
         <FormInput
           label="Date of Birth"
           type="date"
@@ -124,7 +126,6 @@ export default function ProfileInformation() {
         />
       </div>
 
-      {/* Save Button */}
       <button
         onClick={handleSave}
         disabled={isSaving}
