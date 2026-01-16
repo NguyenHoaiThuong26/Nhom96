@@ -19,14 +19,14 @@ function SignupPage() {
     e.preventDefault()
     setError(null)
 
-    // 1. Validate confirm password
+    // Kiểm tra mật khẩu xác nhận
     if (password !== confirmPassword) {
-      setError("Passwords do not match")
+      setError("Mật khẩu không khớp")
       return
     }
     
     if (password.length < 6) {
-      setError("Password must be at least 6 characters")
+      setError("Mật khẩu phải có ít nhất 6 ký tự")
       return
     }
 
@@ -54,7 +54,7 @@ function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen relative bg-[url('/login-background.png')] bg-cover bg-center">
+    <div className="min-h-screen relative bg-[url('/images/login-background.png')] bg-cover bg-center">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
@@ -64,10 +64,10 @@ function SignupPage() {
           {/* Title */}
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-bold text-[#5c3a2e]">
-              Create your account
+              Tạo tài khoản
             </h1>
             <p className="text-sm text-gray-500">
-              Join Nhom96 and start your journey
+              Tham gia Nhom96 và bắt đầu hành trình của bạn
             </p>
           </div>
 
@@ -90,7 +90,7 @@ function SignupPage() {
             {/* Username */}
             <div>
               <label className="block text-sm font-medium text-[#5c3a2e] mb-1">
-                Username
+                Tên đăng nhập
               </label>
               <input
                 type="text"
@@ -101,7 +101,7 @@ function SignupPage() {
                   focus:ring-2 focus:ring-[#cc5970]/30
                   outline-none transition
                 "
-                placeholder="your username"
+                placeholder="tên đăng nhập của bạn"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -111,7 +111,7 @@ function SignupPage() {
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-[#5c3a2e] mb-1">
-                Email Address
+                Địa chỉ Email
               </label>
               <input
                 type="email"
@@ -132,7 +132,7 @@ function SignupPage() {
             {/* Password */}
             <div>
               <label className="block text-sm font-medium text-[#5c3a2e] mb-1">
-                Password
+                Mật khẩu
               </label>
               <input
                 type="password"
@@ -153,7 +153,7 @@ function SignupPage() {
             {/* Confirm Password */}
             <div>
               <label className="block text-sm font-medium text-[#5c3a2e] mb-1">
-                Confirm Password
+                Xác nhận mật khẩu
               </label>
               <input
                 type="password"
@@ -177,16 +177,16 @@ function SignupPage() {
               disabled={loading}
               className="w-full bg-[#cc5970] text-white py-3 rounded-lg font-medium hover:bg-[#b84d61] transition"
             >
-              {loading ? "Creating account..." : "Create Account"}
+              {loading ? "Đang tạo tài khoản..." : "Đăng ký"}
             </button>
           </form>
 
           {/* Footer text */}
           <div className="pt-6 mt-4 border-t border-gray-200/50 text-center space-y-2">
             <p className="text-sm text-gray-500">
-              Already have an account?{" "}
+              Đã có tài khoản?{" "}
               <Link to="/login" className="text-[#cc5970] hover:underline">
-                Login
+                Đăng nhập
               </Link>
             </p>
           </div>

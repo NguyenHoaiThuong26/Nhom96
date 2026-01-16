@@ -13,47 +13,48 @@ import {
 const timelineData = [
   {
     icon: Cake,
-    year: "2010",
-    title: "Founded",
-    description: ["Started with a dream and", "grandmother's recipe"],
+    year: "2021",
+    title: "Khởi Nguồn Đam Mê",
+    description: ["Ra đời từ tình yêu với nghệ thuật", "làm bánh kem thủ công"],
   },
   {
     icon: Award,
-    year: "2012",
-    title: "First Award",
-    description: ["Best Local Bakery recognition"],
+    year: "2022",
+    title: "Vị Ngon Được Công Nhận",
+    description: ["Top 10 tiệm bánh ngọt được", "yêu thích nhất khu vực"],
   },
   {
-    icon: TrendingUp,
-    year: "2015",
-    title: "1M Pastries",
-    description: ["Reached one million pastries", "sold"],
+    icon: TrendingUp, 
+    year: "2023",
+    title: "Vạn Lời Yêu Thương",
+    description: ["Đồng hành cùng hơn 100.000", "bữa tiệc sinh nhật & kỷ niệm"],
   },
   {
     icon: Store,
-    year: "2018",
-    title: "Expansion",
-    description: ["Opened second location", "downtown"],
+    year: "2023",
+    title: "Mở Rộng Không Gian",
+    description: ["Khai trương chi nhánh Flagship", "với không gian trải nghiệm cao cấp"],
   },
   {
     icon: Globe,
-    year: "2020",
-    title: "Going Digital",
-    description: ["Launched online ordering", "platform"],
+    year: "2024",
+    title: "Kết Nối Ngọt Ngào",
+    description: ["Hệ thống đặt bánh cá nhân hóa", "trực tuyến chính thức ra mắt"],
   },
   {
     icon: Globe,
-    year: "2022",
-    title: "5 Cities",
-    description: ["Expanded to 5 cities", "nationwide"],
+    year: "2025",
+    title: "Vươn Tầm Thương Hiệu",
+    description: ["Sáng tạo hơn 50 dòng bánh độc quyền", "phục vụ tại các thành phố lớn"],
   },
   {
     icon: Leaf,
-    year: "2024",
-    title: "Sustainability",
-    description: ["Achieved carbon-neutral", "operations"],
+    year: "2026",
+    title: "Bánh Kem 'Xanh'",
+    description: ["Sử dụng 100% nguyên liệu tự nhiên", "và bao bì thân thiện môi trường"],
   },
 ];
+
 
 export default function TimelineCardsSection() {
   const CARD_WIDTH = 320;

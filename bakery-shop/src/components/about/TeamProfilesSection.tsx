@@ -12,27 +12,27 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: "Sarah Chen",
-    role: "Head Baker & Founder",
+    name: "Nguyễn Hoài Thương",
+    role: "Nghệ nhân tạo hình & Người sáng lập",
     image: "/images/about_chef1.png",
-    quote: "Every loaf is a love letter to our community.",
-    funFact: "Can identify 47 types of flour by touch",
+    quote: "Mỗi chiếc bánh kem là một tác phẩm nghệ thuật chứa đựng những lời chúc hạnh phúc nhất.",
+    funFact: "Có thể vẽ những họa tiết phức tạp trên bánh chỉ trong vòng 5 phút",
   },
   {
     id: 2,
-    name: "Marcus Rodriguez",
-    role: "Pastry Chef",
+    name: "Nguyễn Hoàng Phúc",
+    role: "Bếp trưởng Pastry",
     image: "/images/about_chef2.png",
-    quote: "Art you can taste — that's my philosophy.",
-    funFact: "3× international pastry awards",
+    quote: "Sự hòa quyện giữa hương vị tinh tế và thẩm mỹ hiện đại là triết lý sáng tạo của tôi.",
+    funFact: "Từng tu nghiệp tại Pháp và sở hữu bí quyết cốt bánh mềm mịn độc bản",
   },
   {
     id: 3,
-    name: "Emma Thompson",
-    role: "Operations Manager",
+    name: "Nguyễn Đức Phúc",
+    role: "Giám đốc trải nghiệm khách hàng",
     image: "/images/about_chef3.png",
-    quote: "We measure success in smiles per day.",
-    funFact: "Remembers every regular’s order",
+    quote: "Chúng tôi không chỉ bán bánh, chúng tôi cùng bạn tạo nên những kỷ niệm vô giá.",
+    funFact: "Có khả năng tư vấn đúng mẫu bánh mơ ước chỉ sau 3 câu hỏi",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function TeamProfilesSection() {
 
   return (
     <section
-      aria-label="Team Profiles"
+      aria-label="Hồ sơ đội ngũ"
       className="pb-20"
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -61,7 +61,7 @@ export default function TeamProfilesSection() {
                   transition
                 "
               >
-                {/* Image */}
+                {/* Hình ảnh */}
                 <div className="relative h-80">
                   <img
                     src={member.image}
@@ -69,7 +69,7 @@ export default function TeamProfilesSection() {
                     className="w-full h-full object-cover"
                   />
 
-                  {/* Overlay */}
+                  {/* Lớp phủ */}
                   <div
                     className={`
                       absolute inset-0 flex items-end
@@ -89,7 +89,7 @@ export default function TeamProfilesSection() {
                   </div>
                 </div>
 
-                {/* Info */}
+                {/* Thông tin */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-[#5c3a2e]">
                     {member.name}
@@ -100,7 +100,7 @@ export default function TeamProfilesSection() {
                   </p>
 
                   <span className="text-xs text-gray-500 flex items-center gap-2">
-                    Hover to learn more →
+                    Di chuột để tìm hiểu thêm →
                   </span>
                 </div>
               </article>

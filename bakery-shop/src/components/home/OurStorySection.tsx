@@ -1,52 +1,51 @@
-
 export default function OurStorySection() {
-    const stats = [
-    { value: "500+", label: "Happy Customers" },
-    { value: "50+", label: "Daily Varieties" },
-    ]
+  const stats = [
+    { value: "500+", label: "Khách hàng hài lòng" },
+    { value: "50+", label: "Sản phẩm mỗi ngày" },
+  ]
 
   return (
     <section className="bg-white py-24">
       <div className="mx-auto max-w-[1440px] px-8">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 items-center">
-          {/* Image */}
+          {/* Hình ảnh */}
           <div className="relative">
             <div className="overflow-hidden rounded-3xl shadow-xl">
               <img
-                src="/images/home-our-story.png"
-                alt="Artisan baker kneading dough in bakery"
+                src="/images/home-make2.jpg"
+                alt="Thợ làm bánh thủ công đang nhào bột trong tiệm bánh"
                 className="h-[500px] w-full object-cover"
               />
             </div>
 
-            {/* Decorative circle */}
+            {/* Hình tròn trang trí */}
             <div
               className="absolute -bottom-6 -right-6 h-24 w-24 rounded-full bg-[#f9e2a1] opacity-80"
               aria-hidden="true"
             />
           </div>
 
-          {/* Content */}
+          {/* Nội dung */}
           <div>
             <h2 className="text-6xl font-bold text-[#5c3a2e]">
-              Our Story
+              Hành trình ngọt ngào
             </h2>
 
             <p className="mt-6 text-xl leading-relaxed text-[#5c3a2ecc]">
-              Started as a weekend pop-up in 2019, CrumbCraft has grown
-              to become your neighborhood&apos;s favorite bakehouse.
-              What began with a passion for traditional sourdough has
-              blossomed into a full artisan bakery.
+              Bắt đầu từ niềm đam mê nhỏ với những chiếc bánh kem thủ công vào năm 2021, 
+              96 Bakery đã lớn dần từ tình yêu của khách hàng trong từng khu phố. 
+              Từ việc tìm kiếm hương vị cốt bánh hoàn hảo, chúng tôi đã xây dựng nên 
+              một không gian nghệ thuật bánh ngọt trọn vẹn.
             </p>
 
             <p className="mt-6 text-lg leading-relaxed text-[#5c3a2eb2]">
-              We believe in the magic of simple, quality ingredients
-              transformed through time-honored techniques. Every loaf
-              tells a story, every pastry carries our commitment to
-              excellence.
+              Chúng tôi tin rằng mỗi chiếc bánh kem không chỉ là một món tráng miệng, 
+              mà là một tác phẩm nghệ thuật đánh dấu những kỷ niệm vô giá. Với nguyên liệu 
+              tự nhiên và sự tỉ mỉ trong từng nét vẽ, mỗi sản phẩm ra lò là một lời 
+              cam kết về chất lượng và sự tận tâm của chúng tôi.
             </p>
 
-            {/* Stats */}
+            {/* Thống kê */}
             <div className="mt-10 flex flex-wrap gap-8">
               {stats.map((stat) => (
                 <div key={stat.label} className="w-40 text-center">
@@ -60,12 +59,12 @@ export default function OurStorySection() {
               ))}
             </div>
 
-            {/* CTA */}
+            {/* Kêu gọi hành động */}
             <button
               className="mt-12 rounded-3xl bg-[#5c3a2e] px-10 py-4 text-lg font-semibold text-white transition hover:opacity-90"
-              aria-label="Read our full story"
+              aria-label="Đọc toàn bộ câu chuyện của chúng tôi"
             >
-              Our Full Story
+              Câu chuyện đầy đủ
             </button>
           </div>
         </div>

@@ -25,17 +25,18 @@ export default function MyAccountPage() {
     <>
     <Header />
 
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-rose-50 px-4 pt-24">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-rose-50 px-4 pt-24 pb-16">
       <div className="mx-auto max-w-7xl">
         {/* Page Header */}
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
-            My Account
+            Thông tin tài khoản
           </h1>
           <p className="mt-2 text-gray-600">
-            Manage your profile and order history
+            Quản lý hồ sơ cá nhân và lịch sử mua hàng
           </p>
         </header>
+
 
         {/* Main Content */}
         <div className="flex flex-col gap-6 lg:flex-row">

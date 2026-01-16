@@ -1,37 +1,35 @@
-
-
 export default function BannerSection() {
 
-  const HEADING = ["Freshly baked,", "daily."]
+  const HEADING = ["Gói trọn ngọt ngào,", "trong từng lớp bánh."]
   const DESCRIPTION = [
-    "From our signature sourdough loaves to seasonal berry",
-    "tarts, every creation is handcrafted with love and the",
-    "finest ingredients.",
+    "Từ những chiếc bánh kem bento xinh xắn đến",
+    "những tuyệt tác bánh kem đa tầng lộng lẫy, mỗi sản phẩm",
+    "đều là tâm huyết giúp bạn lưu giữ mọi khoảnh khắc đáng nhớ."
   ]
 
   const handleOrderClick = () => {
-    console.log("Order Now clicked")
+    console.log("Đã nhấn Đặt hàng ngay")
   }
 
   const handleMenuClick = () => {
-    console.log("View Menu clicked")
+    console.log("Đã nhấn Xem thực đơn")
   }
 
   return (
     <section className="relative flex h-[1024px] w-full items-center justify-center">
-      {/* Background */}
+      {/* Hình nền */}
       <img
-        src="/images/home-background.png"
-        alt="Bakery background"
+        src="/images/home-background1.jfif"
+        alt="Hình nền tiệm bánh"
         className="absolute inset-0 h-full w-full object-cover"
       />
 
-      {/* Overlay */}
+      {/* Lớp phủ */}
       <div className="absolute inset-0 bg-black/40" />
 
-      {/* Content */}
+      {/* Nội dung */}
       <div className="relative z-10 flex w-full max-w-[1440px] flex-col items-center px-8">
-        {/* Heading */}
+        {/* Tiêu đề */}
         <header className="mb-6 flex flex-wrap justify-center">
           {HEADING.map((text) => (
             <h1
@@ -43,7 +41,7 @@ export default function BannerSection() {
           ))}
         </header>
 
-        {/* Description */}
+        {/* Mô tả */}
         <div className="mb-12 max-w-2xl text-center">
           {DESCRIPTION.map((line, index) => (
             <p
@@ -55,14 +53,14 @@ export default function BannerSection() {
           ))}
         </div>
 
-        {/* Actions */}
+        {/* Hành động */}
         <div className="flex items-center gap-6">
           <PrimaryButton onClick={handleOrderClick}>
-            Order Now
+            Đặt hàng ngay
           </PrimaryButton>
 
           <OutlineButton onClick={handleMenuClick}>
-            View Menu
+            Xem thực đơn
           </OutlineButton>
         </div>
       </div>
@@ -70,7 +68,7 @@ export default function BannerSection() {
   )
 }
 
-/* ================= Buttons ================= */
+/* ================= Các nút ================= */
 
 function PrimaryButton({
   children,

@@ -5,6 +5,8 @@ import AboutPage from '../pages/AboutPage'
 import ProfilePage from '../pages/account/ProfilePage'
 import ProtectedRoute from "../route/ProtectedRoute"
 import HomePage from '../pages/HomePage'
+import ForgetPassword from '../pages/account/ForgetPassword'
+
 
 
 const AppRoutes = () => {
@@ -15,6 +17,7 @@ const AppRoutes = () => {
             {/* Public */}   
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/forgetpassword" element={<ForgetPassword />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/home" element={<HomePage />} />
 

@@ -4,8 +4,8 @@
       "id": "1",
       "username": "hthuong",
       "email": "thuong@gmail.com",
-      "password": "12345678",
-      "fullName": "Nguyễn Hoài Thương",
+      "password": "123456789",
+      "fullName": "Nguyễn Văn A",
       "phone": "0938998972",
       "address": "TP. Hồ Chí Minh",
       "dateOfBirth": "2003-09-26"
@@ -48,22 +48,19 @@
       "id": "ORD-001",
       "userId": 1,
       "date": "2025-01-02",
-      "status": "completed",
-      "total": 250000
+      "status": "completed"
     },
     {
       "id": "ORD-002",
       "userId": 1,
       "date": "2025-01-03",
-      "status": "cancelled",
-      "total": 100000
+      "status": "cancelled"
     },
     {
       "id": "ORD-003",
       "userId": 1,
       "date": "2025-01-05",
-      "status": "pending",
-      "total": 0
+      "status": "pending"
     }
   ],
   "orderItems": [
@@ -77,7 +74,7 @@
     },
     {
       "id": "2",
-      "orderId": "ORD-001",
+      "orderId": "ORD-002",
       "cakeId": 2,
       "cakeName": "Bánh mini",
       "price": 50000,
@@ -85,11 +82,19 @@
     },
     {
       "id": "3",
-      "orderId": "ORD-002",
+      "orderId": "ORD-003",
       "cakeId": 2,
       "cakeName": "Bánh mini",
       "price": 50000,
       "quantity": 2
+    },
+    {
+      "id": "4",
+      "orderId": "ORD-002",
+      "cakeId": 2,
+      "cakeName": "Bánh kem dâu",
+      "price": 250000,
+      "quantity": 1
     }
   ]
 }

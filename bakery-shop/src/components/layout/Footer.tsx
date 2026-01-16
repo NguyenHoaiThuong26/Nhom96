@@ -1,55 +1,45 @@
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Facebook,
-  Instagram,
-  Twitter,
-} from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, } from "lucide-react";
 
 const contactInfo = [
   {
     icon: MapPin,
-    lines: ["123 Baker Street", "Downtown, NY 10012"],
+    lines: ["Đại học Nông Lâm Tp Hồ Chí Minh"],
   },
   {
     icon: Phone,
-    lines: ["(555) 123-BAKE"],
+    lines: ["0938998972"],
   },
   {
     icon: Mail,
-    lines: ["hello@crumbcraft.com"],
+    lines: ["nhom96@gmail.com"],
   },
 ];
 
 const storeHours = [
-  { day: "Monday - Friday", hours: "7AM - 7PM" },
-  { day: "Saturday", hours: "8AM - 8PM" },
-  { day: "Sunday", hours: "8AM - 6PM" },
+  { day: "Thứ Hai - Thứ Sáu", hours: "7AM - 7PM" },
+  { day: "Thứ Bảy", hours: "8AM - 8PM" },
+  { day: "Chủ Nhật", hours: "8AM - 6PM" },
 ];
 
 const quickLinks = [
-  "Our Menu",
-  "Catering",
-  "Locations",
-  "Gift Cards",
-  "Careers",
+  "Trang chủ",
+  "Cửa hàng",
+  "Liên hệ",
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-[#5c3a2e] text-white/80">
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Top */}
+        {/* Phần trên */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Brand */}
+          {/* Thương hiệu */}
           <div className="space-y-4">
             <h2 className="text-3xl font-semibold text-[#f9e2a1]">
-              CrumbCraft
+              69 Bakery
             </h2>
             <p className="text-sm leading-6">
-              Artisan bakery crafting fresh breads, pastries, and treats
-              daily with love and premium ingredients.
+              "Trao gửi yêu thương qua từng lớp bánh kem mềm mịn, được làm thủ công mỗi ngày từ nguyên liệu cao cấp, mang đến hương vị ngọt thanh và vẻ đẹp hoàn mỹ cho bữa tiệc của bạn."
             </p>
 
             <div className="flex gap-4 pt-2">
@@ -59,10 +49,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact */}
+          {/* Liên hệ */}
           <div>
             <h3 className="text-xl font-semibold text-[#f9e2a1] mb-4">
-              Contact Us
+              Liên hệ
             </h3>
             <ul className="space-y-3">
               {contactInfo.map((item, index) => (
@@ -78,10 +68,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Store Hours */}
+          {/* Giờ mở cửa */}
           <div>
             <h3 className="text-xl font-semibold text-[#f9e2a1] mb-4">
-              Store Hours
+              Giờ mở cửa
             </h3>
             <ul className="space-y-2 text-sm">
               {storeHours.map((item, index) => (
@@ -93,10 +83,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Liên kết nhanh */}
           <div>
             <h3 className="text-xl font-semibold text-[#f9e2a1] mb-4">
-              Quick Links
+              Liên kết nhanh
             </h3>
             <ul className="space-y-2 text-sm">
               {quickLinks.map((link) => (
@@ -113,15 +103,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
+        {/* Phần dưới */}
         <div className="border-t border-white/20 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between text-sm gap-4">
-          <p>© 2024 CrumbCraft Bakery. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#privacy" className="hover:text-[#f9e2a1] transition">
-              Privacy Policy
+              Chính sách bảo mật
             </a>
             <a href="#terms" className="hover:text-[#f9e2a1] transition">
-              Terms of Service
+              Điều khoản dịch vụ
             </a>
           </div>
         </div>
@@ -130,7 +119,7 @@ export default function Footer() {
   );
 }
 
-/* icon social */
+/* Icon mạng xã hội */
 function SocialIcon({ icon: Icon }: { icon: React.ElementType }) {
   return (
     <button className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition">
