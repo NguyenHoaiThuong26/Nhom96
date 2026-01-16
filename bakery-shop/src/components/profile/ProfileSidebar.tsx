@@ -1,6 +1,11 @@
 "use client"
 
-import { LogOut, User, ShoppingBag } from "lucide-react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { LogOut, User as UserIcon, ShoppingBag } from "lucide-react"
+import AuthService from "../../service/AuthService"
+import type { User } from "../../service/AuthService"
+
 
 type Tab = "profile" | "orders"
 
@@ -9,24 +14,14 @@ interface UserProfileSidebarProps {
   onTabChange: (tab: Tab) => void
 }
 
-const USER = {
-  name: "Sarah Baker",
-  email: "sarah@example.com",
-  initials: "SB",
-}
-
-const NAV_ITEMS: {
-  key: Tab
-  label: string
-  icon: React.ElementType
-}[] = [
+const NAV_ITEMS = [
   {
-    key: "profile",
+    key: "profile" as Tab,
     label: "Profile Information",
-    icon: User,
+    icon: UserIcon,
   },
   {
-    key: "orders",
+    key: "orders" as Tab,
     label: "Order History",
     icon: ShoppingBag,
   },
@@ -36,21 +31,52 @@ export default function UserProfileSidebar({
   activeTab,
   onTabChange,
 }: UserProfileSidebarProps) {
+  const navigate = useNavigate()
+  const [user, setUser] = useState<User | null>(null)
+
+  // ✅ Lấy user đã đăng nhập
+  useEffect(() => {
+    const currentUser = AuthService.getCurrentUser()
+
+    if (!currentUser) {
+      navigate("/login")
+      return
+    }
+
+    setUser(currentUser)
+  }, [navigate])
+
+  // ✅ Logout
+  const handleLogout = () => {
+    AuthService.logout()
+    navigate("/login")
+  }
+
+  if (!user) return null
+
+  // ✅ Tạo initials
+  const initials = user.fullName
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase()
+
   return (
     <aside className="w-full lg:w-80">
-      <div className="rounded-2xl bg-white p-6 shadow-sm backdrop-blur-sm lg:sticky lg:top-6">
+      <div className="rounded-2xl bg-white p-6 shadow-sm lg:sticky lg:top-6">
         {/* User Info */}
         <div className="flex flex-col items-center gap-4">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-rose-200 text-3xl font-bold text-amber-900">
-            {USER.initials}
+            {initials}
           </div>
 
           <div className="text-center">
             <h2 className="text-lg font-semibold text-gray-900">
-              {USER.name}
+              {user.fullName}
             </h2>
             <p className="text-sm text-gray-600">
-              {USER.email}
+              {user.email}
             </p>
           </div>
         </div>
@@ -73,7 +99,10 @@ export default function UserProfileSidebar({
         <Divider />
 
         {/* Logout */}
-        <button className="flex w-full items-center justify-center gap-2 rounded-full bg-red-50 px-4 py-3 font-medium text-red-700 transition hover:bg-red-100">
+        <button
+          onClick={handleLogout}
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-red-50 px-4 py-3 font-medium text-red-700 transition hover:bg-red-100"
+        >
           <LogOut className="h-5 w-5" />
           Logout
         </button>
