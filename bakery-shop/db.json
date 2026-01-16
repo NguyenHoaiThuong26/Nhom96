@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "hthuong",
       "email": "thuong@gmail.com",
       "password": "12345678",
@@ -11,7 +11,7 @@
       "dateOfBirth": "2003-09-26"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "dphuc",
       "email": "dphuc@gmail.com",
       "password": "12345678",
@@ -21,7 +21,7 @@
       "dateOfBirth": "2003-09-26"
     },
     {
-      "id": 3,
+      "id": "3",
       "username": "hphuc",
       "email": "hphuc@gmail.com",
       "password": "12345678",
@@ -29,64 +29,67 @@
       "phone": "0909123456",
       "address": "Thành phố Hồ Chí Minh",
       "dateOfBirth": "2003-01-15"
+    },
+    {
+      "id": "580b",
+      "username": "hthuong1",
+      "email": "hthuong1@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": "3449",
+      "username": "hthuong3",
+      "email": "hthuong3@gmail.com",
+      "password": "12345678"
     }
   ],
-
-
   "orders": [
     {
-        "id": "ORD-001",
-        "userId": 1,
-        "date": "2025-01-02",
-        "status": "completed",
-        "total": 250000
+      "id": "ORD-001",
+      "userId": 1,
+      "date": "2025-01-02",
+      "status": "completed",
+      "total": 250000
     },
     {
-        "id": "ORD-002",
-        "userId": 1,
-        "date": "2025-01-03",
-        "status": "cancelled",
-        "total": 100000
+      "id": "ORD-002",
+      "userId": 1,
+      "date": "2025-01-03",
+      "status": "cancelled",
+      "total": 100000
     },
     {
-        "id": "ORD-003",
-        "userId": 1,
-        "date": "2025-01-05",
-        "status": "pending",
-        "total": 0
+      "id": "ORD-003",
+      "userId": 1,
+      "date": "2025-01-05",
+      "status": "pending",
+      "total": 0
     }
- ],
-
- "orderItems": [
+  ],
+  "orderItems": [
     {
-        "id": 1,
-        "orderId": "ORD-001",
-        "cakeId": 1,
-        "cakeName": "Bánh sinh nhật",
-        "price": 150000,
-        "quantity": 1
+      "id": "1",
+      "orderId": "ORD-001",
+      "cakeId": 1,
+      "cakeName": "Bánh sinh nhật",
+      "price": 150000,
+      "quantity": 1
     },
     {
-        "id": 2,
-        "orderId": "ORD-001",
-        "cakeId": 2,
-        "cakeName": "Bánh mini",
-        "price": 50000,
-        "quantity": 2
+      "id": "2",
+      "orderId": "ORD-001",
+      "cakeId": 2,
+      "cakeName": "Bánh mini",
+      "price": 50000,
+      "quantity": 2
     },
     {
-        "id": 3,
-        "orderId": "ORD-002",
-        "cakeId": 2,
-        "cakeName": "Bánh mini",
-        "price": 50000,
-        "quantity": 2
+      "id": "3",
+      "orderId": "ORD-002",
+      "cakeId": 2,
+      "cakeName": "Bánh mini",
+      "price": 50000,
+      "quantity": 2
     }
- ]
-
-
-
-
-
-
+  ]
 }

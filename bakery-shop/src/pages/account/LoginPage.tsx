@@ -7,7 +7,6 @@ function LoginPage() {
   const navigate = useNavigate()
   const [password, setPassword] = useState("");
   const [identifier, setIdentifier] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -49,7 +48,7 @@ function LoginPage() {
             </p>
           </div>
 
-           {/* ERROR */}
+          {/* ERROR */}
           {error && (
             <div className="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">
               {error}
@@ -100,18 +99,8 @@ function LoginPage() {
               />
             </div>
 
-            {/* Remember me */}
+            {/* Forgot password */}
             <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-3 h-3 accent-[#cc5970]"
-                />
-                <span className="text-[#5c3a2e]">Remember me</span>
-              </label>
-
               <a href="#" className="text-[#cc5970] hover:underline">
                 Forgot password?
               </a>

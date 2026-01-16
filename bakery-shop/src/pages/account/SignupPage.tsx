@@ -1,32 +1,57 @@
-import { useState } from "react";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import AuthService from "../../service/AuthService"
+import { Link } from "react-router-dom"
+
 
 function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [acceptTerms, setAcceptTerms] = useState(false);
 
-  const handleSignup = (e: React.FormEvent) => {
-    e.preventDefault();
+  const navigate = useNavigate()
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+
+    // 1. Validate confirm password
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
+      setError("Passwords do not match")
+      return
+    }
+    
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters")
+      return
     }
 
-    if (!acceptTerms) {
-      alert("You must accept the Terms & Conditions");
-      return;
-    }
+    try {
+      setLoading(true)
 
-    console.log({
-      username,
-      email,
-      password,
-      acceptTerms,
-    });
-  };
+      await AuthService.register({
+        username,
+        email,
+        password,
+      })
+
+      setError(null)
+      setSuccess("Đăng ký thành công! Vui lòng đăng nhập.")
+
+      setTimeout(() => {
+        navigate("/login")
+      }, 1500)
+
+    } catch (err: any) {
+      setError(err.message || "Đăng ký thất bại")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen relative bg-[url('/login-background.png')] bg-cover bg-center">
@@ -45,6 +70,20 @@ function SignupPage() {
               Join Nhom96 and start your journey
             </p>
           </div>
+
+          {/* ERROR */}
+          {error && (
+            <div className="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">
+              {error}
+            </div>
+          )}
+
+          {/* SUCCESS */}
+          {success && (
+            <div className="rounded-lg bg-green-50 px-4 py-2 text-sm text-green-600">
+              {success}
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSignup} className="space-y-5 text-left">
@@ -132,32 +171,13 @@ function SignupPage() {
               />
             </div>
 
-            {/* Terms */}
-            <div className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={acceptTerms}
-                onChange={(e) => setAcceptTerms(e.target.checked)}
-                className="mt-1 w-3 h-3 accent-[#cc5970]"
-              />
-              <p className="text-gray-600">
-                I agree to the{" "}
-                <a href="#" className="text-[#cc5970] hover:underline">
-                  Terms & Conditions
-                </a>{" "}
-                and{" "}
-                <a href="#" className="text-[#cc5970] hover:underline">
-                  Privacy Policy
-                </a>
-              </p>
-            </div>
-
             {/* Submit */}
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-[#cc5970] text-white py-3 rounded-lg font-medium hover:bg-[#b84d61] transition"
             >
-              Create Account
+              {loading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
@@ -165,9 +185,9 @@ function SignupPage() {
           <div className="pt-6 mt-4 border-t border-gray-200/50 text-center space-y-2">
             <p className="text-sm text-gray-500">
               Already have an account?{" "}
-              <a href="/login" className="text-[#cc5970] hover:underline">
+              <Link to="/login" className="text-[#cc5970] hover:underline">
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         </div>

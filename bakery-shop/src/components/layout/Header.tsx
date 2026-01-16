@@ -1,5 +1,9 @@
-import { Search, User, ShoppingCart } from "lucide-react";
+import { Search, User, ShoppingCart, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import AuthService from "../../service/AuthService"
+
+
 
 const navigationLinks = [
   { label: "Home", path: "/" },
@@ -13,11 +17,29 @@ const navigationLinks = [
 
 export default function Header() {
   const navigate = useNavigate()
+  const user = AuthService.getCurrentUser()
+  const [open, setOpen] = useState(false)
+
+  const handleUserClick = () => {
+    if (!user) {
+      navigate("/login")
+      return
+    }
+
+    // đã login → toggle dropdown
+    setOpen((prev) => !prev)
+  }
+
+  const handleLogout = () => {
+    AuthService.logout()
+    setOpen(false)
+    navigate("/login")
+  }
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full bg-white/90 backdrop-blur-md shadow-sm caret-transparent">
+    <header className="fixed top-0 left-0 z-50 w-full bg-white/90 backdrop-blur-md shadow-sm">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        
+
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow">
@@ -50,9 +72,35 @@ export default function Header() {
           </HeaderIcon>
 
           {/* Account */}
-          <HeaderIcon label="Account" onClick={() => navigate("/profile")}>
-            <User className="h-5 w-5" />
-          </HeaderIcon>
+          <div className="relative">
+            <HeaderIcon label="Account" onClick={handleUserClick}>
+              <User className="h-5 w-5" />
+            </HeaderIcon>
+
+            {/* Dropdown khi đã login */}
+            {user && open && (
+              <div className="absolute right-0 mt-2 w-44 rounded-xl bg-white shadow-lg border border-gray-100">
+                <button
+                  onClick={() => {
+                    setOpen(false)
+                    navigate("/profile")
+                  }}
+                  className="flex w-full items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50"
+                >
+                  <User className="h-4 w-4" />
+                  Profile
+                </button>
+
+                <button
+                  onClick={handleLogout}
+                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Cart */}
           <button

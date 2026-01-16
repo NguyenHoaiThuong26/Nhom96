@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import UserProfileSidebar from "../../components/profile/ProfileSidebar"
 import ProfileInformation from "../../components/profile/ProfileInformation"
