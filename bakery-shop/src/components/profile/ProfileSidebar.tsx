@@ -17,15 +17,15 @@ interface UserProfileSidebarProps {
 const NAV_ITEMS = [
   {
     key: "profile" as Tab,
-    label: "Profile Information",
+    label: "Thông tin cá nhân",
     icon: UserIcon,
   },
   {
     key: "orders" as Tab,
-    label: "Order History",
+    label: "Lịch sử đơn hàng",
     icon: ShoppingBag,
   },
-]
+];
 
 export default function UserProfileSidebar({
   activeTab,
@@ -34,7 +34,7 @@ export default function UserProfileSidebar({
   const navigate = useNavigate()
   const [user, setUser] = useState<User | null>(null)
 
-  // ✅ Lấy user đã đăng nhập
+  // Lấy user đã đăng nhập
   useEffect(() => {
     const currentUser = AuthService.getCurrentUser()
 
@@ -46,7 +46,7 @@ export default function UserProfileSidebar({
     setUser(currentUser)
   }, [navigate])
 
-  // ✅ Logout
+  // Logout
   const handleLogout = () => {
     AuthService.logout()
     navigate("/login")
@@ -54,7 +54,7 @@ export default function UserProfileSidebar({
 
   if (!user) return null
 
-  // ✅ Tạo initials
+  // Tạo initials
   const initials = user.fullName
     .split(" ")
     .map((word) => word[0])
@@ -104,7 +104,7 @@ export default function UserProfileSidebar({
           className="flex w-full items-center justify-center gap-2 rounded-full bg-red-50 px-4 py-3 font-medium text-red-700 transition hover:bg-red-100"
         >
           <LogOut className="h-5 w-5" />
-          Logout
+          Đăng xuất
         </button>
       </div>
     </aside>

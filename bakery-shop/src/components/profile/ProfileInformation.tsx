@@ -23,7 +23,7 @@ export default function ProfileInformation() {
   const [isSaving, setIsSaving] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
 
-  /* ✅ Load user nếu đã đăng nhập */
+  // Load user nếu đã đăng nhập
   useEffect(() => {
     const user = AuthService.getCurrentUser()
 
@@ -46,32 +46,49 @@ export default function ProfileInformation() {
   }
 
   const handleSave = async () => {
-    setIsSaving(true)
+    const currentUser = AuthService.getCurrentUser()
 
-    // 🔁 Sau này gọi PUT /users/:id
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    if (!currentUser) {
+      alert("Bạn chưa đăng nhập")
+      return
+    }
 
-    setIsSaving(false)
-    setShowSuccess(true)
-    setTimeout(() => setShowSuccess(false), 3000)
+    try {
+      setIsSaving(true)
+
+      await AuthService.updateProfile(currentUser.id, {
+        fullName: formData.fullName,
+        phone: formData.phone,
+        address: formData.address,
+        dateOfBirth: formData.dateOfBirth,
+      })
+
+      setShowSuccess(true)
+      setTimeout(() => setShowSuccess(false), 3000)
+    } catch (err: any) {
+      alert(err.message || "Cập nhật thông tin thất bại")
+    } finally {
+      setIsSaving(false)
+    }
   }
+
 
   return (
     <div className="rounded-2xl bg-white p-8 shadow-sm">
-      {/* Header */}
+      {/* Tiêu đề */}
       <div className="mb-8 flex items-start justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
-            Profile Information
+            Thông tin cá nhân
           </h2>
           <p className="mt-2 text-gray-600">
-            Update your personal details
+            Cập nhật thông tin cá nhân của bạn
           </p>
         </div>
 
         {showSuccess && (
           <div className="rounded-lg bg-green-50 px-4 py-2 text-sm font-medium text-green-700">
-            ✓ Changes saved successfully
+            ✓ Lưu thay đổi thành công
           </div>
         )}
       </div>
@@ -79,7 +96,7 @@ export default function ProfileInformation() {
       {/* Form */}
       <div className="space-y-6">
         <FormInput
-          label="Full Name"
+          label="Họ và tên"
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
@@ -87,7 +104,7 @@ export default function ProfileInformation() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Email Address
+            Địa chỉ email
           </label>
           <input
             type="email"
@@ -98,7 +115,7 @@ export default function ProfileInformation() {
         </div>
 
         <FormInput
-          label="Phone Number"
+          label="Số điện thoại"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
@@ -106,7 +123,7 @@ export default function ProfileInformation() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Address
+            Địa chỉ
           </label>
           <textarea
             name="address"
@@ -118,7 +135,7 @@ export default function ProfileInformation() {
         </div>
 
         <FormInput
-          label="Date of Birth"
+          label="Ngày sinh"
           type="date"
           name="dateOfBirth"
           value={formData.dateOfBirth}
@@ -126,19 +143,28 @@ export default function ProfileInformation() {
         />
       </div>
 
+      {/* Nút lưu */}
       <button
         onClick={handleSave}
         disabled={isSaving}
-        className="mt-8 flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-400 to-amber-400 px-8 py-3 font-semibold text-white hover:shadow-lg disabled:opacity-70"
+        className="
+          mt-8 flex items-center gap-2
+          rounded-full
+          bg-gradient-to-r from-rose-400 to-amber-400
+          px-8 py-3
+          font-semibold text-white
+          hover:shadow-lg
+          disabled:opacity-70
+        "
       >
         <Save className="h-5 w-5" />
-        {isSaving ? "Saving..." : "Save Changes"}
+        {isSaving ? "Đang lưu..." : "Lưu thay đổi"}
       </button>
     </div>
-  )
+  );
+
 }
 
-/* ===== Reusable Input ===== */
 function FormInput({
   label,
   ...props

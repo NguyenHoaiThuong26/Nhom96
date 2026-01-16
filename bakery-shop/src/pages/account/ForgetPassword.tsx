@@ -1,61 +1,75 @@
-import { useState } from "react";
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import AuthService from "../../service/AuthService"
-import { Link } from "react-router-dom"
 
-function LoginPage() {
+function ForgetPasswordPage() {
   const navigate = useNavigate()
-  const [password, setPassword] = useState("");
-  const [identifier, setIdentifier] = useState("");
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
-    setLoading(true)
+    setSuccess(false)
 
-    const trimmedIdentifier = identifier.trim()
+    const trimmedEmail = email.trim()
     const trimmedPassword = password.trim()
+    const trimmedConfirm = confirmPassword.trim()
 
-    if (!trimmedIdentifier || !trimmedPassword) {
+    if (!trimmedEmail || !trimmedPassword || !trimmedConfirm) {
       setError("Vui lòng nhập đầy đủ thông tin")
-      setLoading(false)
+      return
+    }
+
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setError("Email không hợp lệ")
       return
     }
 
     if (trimmedPassword.length < 6) {
       setError("Mật khẩu phải có ít nhất 6 ký tự")
-      setLoading(false)
+      return
+    }
+
+    if (trimmedPassword !== trimmedConfirm) {
+      setError("Mật khẩu xác nhận không khớp")
       return
     }
 
     try {
-      await AuthService.login(identifier, password)
+      setLoading(true)
+      await AuthService.resetPasswordByEmail(trimmedEmail, trimmedPassword)
+      setSuccess(true)
 
-      navigate("/")
+      setTimeout(() => {
+        navigate("/login")
+      }, 2000)
     } catch (err: any) {
-      setError(err.message || "Đăng nhập thất bại")
+      setError(err.message || "Đặt lại mật khẩu thất bại")
     } finally {
       setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="min-h-screen relative bg-[url('/images/login-background.png')] bg-cover bg-center">
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
-      {/* Main content */}
       <main className="relative z-10 pt-28 pb-16 px-4 flex justify-center">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-8">
           {/* Title */}
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-bold text-[#5c3a2e]">
-              Chào mừng bạn đến với 96 Bakery
+              Quên mật khẩu
             </h1>
             <p className="text-sm text-gray-500">
-              Đăng nhập vào tài khoản của bạn hoặc tạo tài khoản mới
+              Nhập email để đặt lại mật khẩu mới
             </p>
           </div>
 
@@ -66,15 +80,22 @@ function LoginPage() {
             </div>
           )}
 
+          {/* SUCCESS */}
+          {success && (
+            <div className="rounded-lg bg-green-50 px-4 py-2 text-sm text-green-700">
+              Đặt lại mật khẩu thành công, đang chuyển về trang đăng nhập...
+            </div>
+          )}
 
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-5 text-left">
+          <form onSubmit={handleResetPassword} className="space-y-5 text-left">
+            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-[#5c3a2e] mb-1">
-                Tên đăng nhập hoặc Email
+                Email
               </label>
               <input
-                type="text"
+                type="email"
                 className="
                   w-full rounded-xl border border-gray-300/60 bg-gray-50 
                   px-5 py-3 text-sm 
@@ -82,17 +103,17 @@ function LoginPage() {
                   focus:ring-2 focus:ring-[#cc5970]/30 
                   outline-none transition
                 "
-                placeholder="tên đăng nhập hoặc email"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
+                placeholder="email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
-
             </div>
 
+            {/* New password */}
             <div>
               <label className="block text-sm font-medium text-[#5c3a2e] mb-1">
-                Mật khẩu
+                Mật khẩu mới
               </label>
               <input
                 type="password"
@@ -110,11 +131,25 @@ function LoginPage() {
               />
             </div>
 
-            {/* Forgot password */}
-            <div className="flex items-center justify-between text-sm">
-              <Link to="/forgetpassword" className="text-[#cc5970] hover:underline">
-                Quên mật khẩu?
-              </Link>
+            {/* Confirm password */}
+            <div>
+              <label className="block text-sm font-medium text-[#5c3a2e] mb-1">
+                Xác nhận mật khẩu
+              </label>
+              <input
+                type="password"
+                className="
+                  w-full rounded-xl border border-gray-300/60 bg-gray-50 
+                  px-5 py-3 text-sm 
+                  focus:bg-white focus:border-[#cc5970] 
+                  focus:ring-2 focus:ring-[#cc5970]/30 
+                  outline-none transition
+                "
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
             </div>
 
             <button
@@ -122,36 +157,20 @@ function LoginPage() {
               disabled={loading}
               className="w-full bg-[#cc5970] text-white py-3 rounded-lg font-medium hover:bg-[#b84d61] transition disabled:opacity-70"
             >
-              {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+              {loading ? "Đang xử lý..." : "Đặt lại mật khẩu"}
             </button>
           </form>
 
-          
-
           <div className="text-center text-sm text-gray-600">
-            Chưa có tài khoản?{" "}
-            <a
-              href="/signup"
-              className="text-[#cc5970] font-medium hover:underline"
-            >
-              Đăng ký
+            Nhớ mật khẩu rồi?{" "}
+            <a href="/login" className="text-[#cc5970] hover:underline">
+              Đăng nhập
             </a>
           </div>
-
-          <div className="pt-6 mt-4 border-t border-gray-200/50 text-center space-y-2">
-            <p className="text-sm text-gray-500">
-              Dữ liệu của bạn được bảo mật tại 96 Bakery
-            </p>
-            <p className="text-xs text-gray-400">
-              Chúng tôi sử dụng các tiêu chuẩn mã hóa hàng đầu để bảo vệ thông tin của bạn
-            </p>
-          </div>
-
         </div>
       </main>
-
     </div>
-  );
+  )
 }
 
-export default LoginPage;
+export default ForgetPasswordPage

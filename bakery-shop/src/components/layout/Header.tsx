@@ -1,18 +1,15 @@
 import { Search, User, ShoppingCart, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import AuthService from "../../service/AuthService"
 
 
 
 const navigationLinks = [
-  { label: "Home", path: "/" },
-  { label: "Shop", path: "/shop" },
-  { label: "About", path: "/about" },
-  { label: "Journal", path: "/journal" },
-  { label: "Locations", path: "/locations" },
-  { label: "Catering", path: "/catering" },
-  { label: "Contact", path: "/contact" },
+  { label: "Trang chủ", path: "/home" },
+  { label: "Cửa hàng", path: "/shop" },
+  { label: "Giới thiệu", path: "/about" },
+  { label: "Liên hệ", path: "/contact" },
 ]
 
 export default function Header() {
@@ -26,7 +23,7 @@ export default function Header() {
       return
     }
 
-    // đã login → toggle dropdown
+    // Bật/tắt dropdown
     setOpen((prev) => !prev)
   }
 
@@ -46,38 +43,48 @@ export default function Header() {
             <span className="text-lg font-bold text-white">96</span>
           </div>
           <span className="text-2xl font-semibold tracking-wide text-amber-700">
-            Nhom96
+            96 Bakery
           </span>
         </Link>
 
-        {/* Navigation */}
-        <nav className="hidden gap-8 font-medium text-gray-700 md:flex">
+        {/* Thanh điều hướng */}
+        <nav className="hidden gap-8 font-medium md:flex">
           {navigationLinks.map((item) => (
-            <Link
+            <NavLink
               key={item.path}
               to={item.path}
-              className="relative transition hover:text-[#cc5970]
-              after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0
-              after:bg-[#cc5970] after:transition-all hover:after:w-full"
+              className={({ isActive }) =>
+                `
+                relative transition
+                ${
+                  isActive
+                    ? "text-[#cc5970] after:w-full"
+                    : "text-gray-700 hover:text-[#cc5970]"
+                }
+                after:absolute after:-bottom-1 after:left-0 after:h-0.5
+                after:bg-[#cc5970] after:transition-all
+                `
+              }
             >
               {item.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
-        {/* Actions */}
+
+        {/* Các hành động */}
         <div className="flex items-center gap-3">
-          <HeaderIcon label="Search">
+          <HeaderIcon label="Tìm kiếm">
             <Search className="h-5 w-5" />
           </HeaderIcon>
 
-          {/* Account */}
+          {/* Tài khoản */}
           <div className="relative">
-            <HeaderIcon label="Account" onClick={handleUserClick}>
+            <HeaderIcon label="Tài khoản" onClick={handleUserClick}>
               <User className="h-5 w-5" />
             </HeaderIcon>
 
-            {/* Dropdown khi đã login */}
+            {/* Dropdown khi đã đăng nhập */}
             {user && open && (
               <div className="absolute right-0 mt-2 w-44 rounded-xl bg-white shadow-lg border border-gray-100">
                 <button
@@ -88,7 +95,7 @@ export default function Header() {
                   className="flex w-full items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50"
                 >
                   <User className="h-4 w-4" />
-                  Profile
+                  Hồ sơ
                 </button>
 
                 <button
@@ -96,15 +103,15 @@ export default function Header() {
                   className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                 >
                   <LogOut className="h-4 w-4" />
-                  Logout
+                  Đăng xuất
                 </button>
               </div>
             )}
           </div>
 
-          {/* Cart */}
+          {/* Giỏ hàng */}
           <button
-            aria-label="Cart"
+            aria-label="Giỏ hàng"
             onClick={() => navigate("/cart")}
             className="relative rounded-full p-2 transition hover:bg-amber-50"
           >
@@ -119,7 +126,7 @@ export default function Header() {
   )
 }
 
-/* Component icon dùng lại */
+/* Component icon dùng chung */
 function HeaderIcon({
   children,
   label,
